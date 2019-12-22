@@ -1,17 +1,23 @@
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map.Entry;
 
 public class Compression {
 	StringBuilder builder=new StringBuilder();
 	char cd;
-	int pointer2=0;
+	List<Integer> Binaries=new ArrayList<>();
+	int loopsize;
+	int EightBinaries=0;
+	char x;
+	StringBuilder b=new StringBuilder();
+	StringBuilder bin=new StringBuilder(); 
+	String BinaryShit;
+	int binarypointer=0;
+	int decimalValue;
 	public void Compress(String filepath) throws IOException 
 	{
 		BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
@@ -26,55 +32,51 @@ public class Compression {
 	    	writer.write(entry.getValue());
 	    	writer.write("\n");
 		}
-	    
-	    
+	    writer.write("$$");
+	    writer.write("\n");
 	    while (la!='$')
 	    {
 	    	//check for space as we replaced it with capital S in the hash map
 	    	if (Character.isWhitespace(la))
-			la='S';
+	    		la='S';
 	    	write=HuffmanTree.code.get(la);
-	    	writer.write(write);
 	    	builder.append(write);
 	    	la = Character.toLowerCase(Frequency.sb.charAt(pointer++));
 	    }
 	    builder.append('$');
+	    pointer=0;
+	    la=builder.charAt(pointer++);
+	    while (la!='$')
+	    {
+	    	if (la=='1')
+	    		Binaries.add(1);
+	    	else if (la=='0')
+	    		Binaries.add(0);
+	    	la=builder.charAt(pointer++);
+	    }
+	    loopsize=Binaries.size();
+	    for (int i=0;i<loopsize;i++)
+	    {
+	    	bin.append(Binaries.get(i));
+	    	EightBinaries++;
+	    	if (EightBinaries==8)
+	    	{
+	    		BinaryShit=bin.toString();
+	    		decimalValue=Integer.parseInt(BinaryShit, 2);
+	    		x=(char)decimalValue;
+	    		EightBinaries=0;
+	    		b.append(x);
+	    		bin=new StringBuilder();
+	    	}
+	    }
+	    b.append('$');
+	    pointer=0;
+	    la=b.charAt(pointer++);
+	    while(la!='$')
+	    {
+	    	writer.write(la);
+	    	la=b.charAt(pointer++);
+	    }	    
 	    writer.close();
-	    bitStream(filepath);
-	}
-	
-	public void bitStream(String filepath) throws IOException
-	{
-	BufferedWriter writer = new BufferedWriter(new FileWriter("Testing.txt"));
-	int currentByte=0;
-	int numOfBitsInCurrentByte=0;
-	int byte1;
-	cd=builder.charAt(pointer2++);
-	File file=new File("Testing.txt");
-	OutputStream output = new BufferedOutputStream(new FileOutputStream(file));
-	for (Entry<Character, String> entry : HuffmanTree.code.entrySet())
-	{
-    	writer.write(entry.getKey());
-    	writer.write('=');
-    	writer.write(entry.getValue());
-    	writer.write("\n");
-	}
-	writer.write("$$\n");
-	while (cd!='$')
-	{
-		if (cd=='1')
-			byte1=1;
-		else byte1=0;
-		currentByte = currentByte >> 1|byte1;
-		//System.out.println(currentByte);
-		numOfBitsInCurrentByte++;
-		if (numOfBitsInCurrentByte==8) {
-			output.write(currentByte);
-		    numOfBitsInCurrentByte = 0;
-		}
-		cd=builder.charAt(pointer2++);
-	}
-	output.close();
-	writer.close();
 	}
 }

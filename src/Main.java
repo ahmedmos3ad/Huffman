@@ -1,5 +1,4 @@
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -25,7 +24,7 @@ public class Main {
 	        	   System.out.println("Please Enter the file you Want to Compress\n");
 	        	   filepath=scan.next();
 	        	   Frequency frequency=new Frequency();
-	       		   frequency.getFreqencies("test.txt");
+	       		   frequency.getFreqencies(filepath);
 	       		   HuffmanTree tree=new HuffmanTree();
 	       		   Compression compress=new Compression();
 	       		   compress.Compress(filepath);
@@ -43,10 +42,8 @@ public class Main {
 	           System.out.println("\nDo you want to continue (Type y or n) \n");
 	           ch = scan.next().charAt(0);                        
 	       } while (ch == 'Y'|| ch == 'y');               
-	    }
-	
-	
-	
+	scan.close();    
 	}
+}
 
 
