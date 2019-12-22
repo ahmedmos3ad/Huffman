@@ -1,3 +1,5 @@
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -29,7 +31,10 @@ public class Main {
 	       		   compress.Compress(filepath);
 	               break;                          
 	           case 2 : 
-	       		   //decompress.decompress(filepath);
+	       		   Decompression decompress=new Decompression();
+	       		   System.out.println("Please Enter the file you Want to Compress\n");
+	        	   filepath=scan.next();
+	        	   decompress.decompress(filepath);
 	               break;                                          
 	           default : 
 	               System.out.println("Wrong Entry \n ");
