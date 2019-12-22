@@ -12,6 +12,8 @@ public class ReadFile {
 		        {
 		            contentBuilder.append(sCurrentLine).append("\n");
 		        }
+		    String text=contentBuilder.toString();
+		    //System.out.println(text);
 		    } 
 		    catch (IOException e) 
 		    {

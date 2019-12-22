@@ -29,14 +29,17 @@ public class Main {
 	        	   filepath=scan.next();
 	        	   File file=new File(filepath);
 	        	   presize=(double) file.length()/1024;
+	        	   long start=System.currentTimeMillis();
 	        	   Frequency frequency=new Frequency();
 	       		   frequency.getFreqencies(filepath);
 	       		   HuffmanTree tree=new HuffmanTree();
 	       		   Compression compress=new Compression();
 	       		   compress.Compress(filepath);
+	       		   long end=System.currentTimeMillis();
 	       		   postsize=(double) file.length()/1024;
-	       		   CompressionRatio=postsize/presize *100;
-	       		   System.out.println("Compression Ratio Equals "+(int)CompressionRatio +"%");
+	       		   CompressionRatio=presize/postsize;
+	       		   System.out.println("Compression Ratio Equals "+(double)CompressionRatio +" times");
+	       		   System.out.println("Compression time taken Equals "+(end-start)+"ms");
 	               break;                          
 	           case 2 : 
 	       		   Decompression decompress=new Decompression();

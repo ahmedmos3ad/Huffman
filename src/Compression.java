@@ -66,13 +66,13 @@ public class Compression {
 	    		x=(char)decimalValue;
 	    		EightBinaries=0;
 	    		b.append(x);
+	    		//System.out.println(x);
 	    		bin=new StringBuilder();
 	    	}
 	    }
-	    b.append('$');
 	    pointer=0;
 	    la=b.charAt(pointer++);
-	    while(la!='$')
+	    while(pointer<b.length())
 	    {
 	    	writer.write(la);
 	    	la=b.charAt(pointer++);
