@@ -19,16 +19,17 @@ public class Frequency {
 			e.printStackTrace();
 		}
 		sb.append('$');
-		la = Character.toLowerCase(sb.charAt(pointer++));
+		//la = Character.toLowerCase(sb.charAt(pointer++));
+		la=sb.charAt(pointer++);
 		while (la!='$')
 		{
 			//replace space with a Capital S
-			if (Character.isWhitespace(la))
-				la='S';
+			//if (Character.isWhitespace(la))
+				//la='S';
 			count = Frequencies.containsKey(la) ? Frequencies.get(la) : 0;
 			Frequencies.put(la, count + 1);
 			//System.out.println(la+""+(count+1)+"\n");
-			la = Character.toLowerCase(sb.charAt(pointer++));
+			la=sb.charAt(pointer++);
 		}
 	}
 	public static int getMapSize()

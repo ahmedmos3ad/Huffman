@@ -28,7 +28,7 @@ public class Decompression {
         // read line
        line = br.readLine();
         //check if it is a comment line
-        while (line.charAt(0) >= 'a' && line.charAt(0) <= 'z' || line.charAt(0) >= 'A' && line.charAt(0) <= 'Z')
+        while (line.charAt(0) >= 'a' && line.charAt(0) <= 'z' || line.charAt(0) >= 'A' && line.charAt(0) <= 'Z' || line.charAt(0)=='\0' || line.charAt(0)=='\n')
         {
         	decode.put(line.substring(0,1),line.substring(2));
         	line = br.readLine();

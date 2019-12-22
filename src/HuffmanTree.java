@@ -26,9 +26,8 @@ public class HuffmanTree {
         // second min extarct. 
         Node y = q.peek(); 
         q.poll(); 
-        // new node f which is equal 
+        // new node f which is equal to the sum of the frequency of the two nodes  
         Node f = new Node(); 
-        // to the sum of the frequency of the two nodes 
         // assigning values to the f node. 
         f.frequency = x.frequency + y.frequency; 
         f.c = '-'; 
